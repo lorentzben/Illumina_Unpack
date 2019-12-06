@@ -1,4 +1,4 @@
-Illumina Unpace
+Illumina Unpack
 -------------------------------------------------
 Tools like Basespace have made accessing sequence files easier, however if multiple copies of the same sequence are generated the nested file structure can become frustrating to deal with. This tool aims to index the nested file structure, detect fastq.gz files within, determine if there are duplicates and choose the larger file, and place all sequences in an output directory. 
 
