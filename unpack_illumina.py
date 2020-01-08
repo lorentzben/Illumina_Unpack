@@ -1,5 +1,6 @@
-# A python script to unpack fastq files from illumina basespace and place in a folder 
+# A python script to unpack fastq files from illumina basespace and place in a folder
 from pathlib import Path
+from pathlib import PurePath
 import os
 import subprocess
 import logging
@@ -34,32 +35,37 @@ logger.addHandler(file_logger)
 logger.addHandler(console_logger)
 
 
-
-def create_index_of_fastq():
-    p = Path('.')
-    Path.mkdir('./ma')
+def create_index_of_fastq(project_name):
+    p = Path.cwd()
+    new_dir = Path(p.parents[0]).joinpath(project_name)
+    Path.mkdir(new_dir)
+    discovered_fastqs = []
     list_of_fastq = list(p.glob('/*.fastq.gz'))
+
     for item in list_of_fastq:
-        shutil.move(item, p.)
-    index = []
-    print("created")
-    print("index saved to file")
-    return index
+        filename = item.name()
+        filesize = item.stat().st_size
+        discovered_fastqs.append(((filename, filesize), item))
+
+    logging.info("Created table of filenames, filesizes and path location")
+
 
 def move_fastq_to_output_dir(index):
     print("moved")
 
+
 def unzip_fastqgz():
     print("unzipped")
 
+
 def main(args):
-    logging.critical("Need to make dir and then copy the files located into the dir")
+    logging.critical(
+        "Need to make dir and then copy the files located into the dir")
     set_up_logger(args.quiet)
 
     index = create_index_of_fastq()
     move_fastq_to_output_dir(index)
     unzip_fastqgz()
-
 
 
 if __name__ == "__main__":
