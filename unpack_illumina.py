@@ -38,7 +38,10 @@ logger.addHandler(console_logger)
 def create_index_of_fastq(project_name):
     p = Path.cwd()
     new_dir = Path(p.parents[0]).joinpath(project_name)
-    Path.mkdir(new_dir)
+    try:
+        Path.mkdir(new_dir)
+    except FileExistsError:
+        pass
     discovered_fastqs = []
     list_of_fastq = list(p.glob('**/*.fastq.gz'))
     # getting filename filesize and location for all .fastq files below the current dir
@@ -99,8 +102,6 @@ def unzip_fastqgz():
 
 
 def main(args):
-    logging.critical(
-        "Need to make dir and then copy the files located into the dir")
     set_up_logger(args.quiet)
     list_of_fastqs = create_index_of_fastq(args.job_name)
     list_of_duplicates = discover_duplicates(list_of_fastqs)
