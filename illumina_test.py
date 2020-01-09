@@ -29,7 +29,7 @@ for item in discovered_fastqs:
     else:
         duplicates.append(filename)
 print(duplicates)
-'''
+
 item_to_remove = []
 # looks over items that were duplicated and finds the object associated with the filename and creates a list of objects
 for item in duplicates:
@@ -38,6 +38,7 @@ for item in duplicates:
             item_to_remove.append(source)
 # sorts list of objects based on filesize
 sorted(item_to_remove, key=lambda x: x[0][1])
+print(item_to_remove)
 # removes objects from filelist until no more duplicates remain, will be removing the small files first
 while duplicates != []:
     #print(duplicates)
