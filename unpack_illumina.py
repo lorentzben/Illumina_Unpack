@@ -103,7 +103,7 @@ def move_fastq_to_output_dir(discover_fastqs, new_dir):
 
 def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
-    subprocess.Popen("tar -xzf *gz")
+    subprocess.Popen("gunzip *.gz")
     logger.info("All files unzipped")
 
 
