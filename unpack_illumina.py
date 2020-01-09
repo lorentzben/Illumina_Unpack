@@ -108,12 +108,12 @@ def main(args):
         print("do all this stuff")
     else:
         unique_fastq_files = unique_fastq_list(list_of_duplicates, list_of_fastqs)
-     '''    
-        Once all fastqs get moved, then if there are no duplicates
-        if args.unpack:
-            os.chdir()
-            subprocess("tar -xzf *.gz")
-    '''
+'''    
+Once all fastqs get moved, then if there are no duplicates
+if args.unpack:
+    os.chdir()
+    subprocess("tar -xzf *.gz")
+'''
 
 if __name__ == "__main__":
     # Build Argument Parser in order to facilitate ease of use for user
