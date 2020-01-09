@@ -102,7 +102,7 @@ def main(args):
     logging.critical(
         "Need to make dir and then copy the files located into the dir")
     set_up_logger(args.quiet)
-    list_of_fastqs = create_index_of_fastq(args.project_name)
+    list_of_fastqs = create_index_of_fastq(args.job_name)
     list_of_duplicates = discover_duplicates(list_of_fastqs)
     if list_of_duplicates == []:
         print("do all this stuff")
