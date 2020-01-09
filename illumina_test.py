@@ -11,7 +11,7 @@ p = Path.cwd()
 new_dir = Path(p.parents[0]).joinpath("test")
 Path.mkdir(new_dir)
 discovered_fastqs = []
-list_of_fastq = list(p.glob('**/*.fastq.gz'))
+list_of_fastq = list(p.glob('**/*'))
 
 for item in list_of_fastq:
     filename = item.name
