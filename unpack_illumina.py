@@ -41,7 +41,7 @@ def create_index_of_fastq(project_name):
     Path.mkdir(new_dir)
     discovered_fastqs = []
     list_of_fastq = list(p.glob('**/*.fastq.gz'))
-
+    # getting filename filesize and location for all .fastq files below the current dir
     for item in list_of_fastq:
         filename = item.name
         filesize = item.stat().st_size
@@ -50,41 +50,44 @@ def create_index_of_fastq(project_name):
     logging.info("Created table of filenames, filesizes and path location")
     return discovered_fastqs
 
-#checks to see if there are duplicate read names, returns [] if none
+# checks to see if there are duplicate read names, returns [] if none
+
+
 def discover_duplicates(list_of_fastqs):
-    duplicates = [] 
+    duplicates = []
+    final_list = []
     for item in list_of_fastqs:
-        
+
         filename = item[0][0]
         if filename not in final_list:
             final_list.append(filename)
         else:
             duplicates.append(filename)
-    
+
     return duplicates
-#removes duplicate reads names and favors larger filesize returns updated list
-def determine_larger_file(list_of_duplicates, list_of_fastqs):
-    
+
+# removes duplicate reads names and favors larger filesize returns updated list
+
+
+def unique_fastq_list(duplicates, discovered_fastqs):
+
     item_to_remove = []
-    #looks over items that were duplicated and finds the object associated with the filename and creates a list of objects
-    for item in list_of_duplicates:
-        for source in list_of_fastqs:
+    # looks over items that were duplicated and finds the object associated with the filename and creates a list of objects
+    for item in duplicates:
+        for source in discovered_fastqs:
             if item == source[0][0]:
                 item_to_remove.append(source)
-    #sorts list of objects based on filesize
-    sorted(item_to_remove, key=lambda x:x[0][1])
-    #removes objects from filelist until no more duplicates remain, will be removing the small files first
-    while list_of_duplicates not []:
-        for thing in item_to_remove:
-            list_of_fastqs.remove(thing)
-            list_of_duplicates.remove(thing[0][0])
-    return list_of_fastqs
-    
+    # sorts list of objects based on filesize
+    sorted(item_to_remove, key=lambda x: x[0][1])
+    # removes objects from filelist until no more duplicates remain, will be removing the small files first
+    for item in item_to_remove:
+        file_size = item[0][1]
+        for thing in discovered_fastqs:
+            if thing[0][0] == item[0][0]:
+                if thing[0][1] < item[0][1]:
+                    discovered_fastqs.remove(thing)
 
-                
-        
-
-
+    return discovered_fastqs
 
 
 def move_fastq_to_output_dir(index):
