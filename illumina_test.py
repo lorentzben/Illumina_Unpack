@@ -11,7 +11,7 @@ p = Path.cwd()
 new_dir = Path(p.parents[0]).joinpath("test")
 Path.mkdir(new_dir)
 discovered_fastqs = []
-list_of_fastq = list(p.glob('**/*'))
+list_of_fastq = list(p.glob('**/*.txt'))
 
 for item in list_of_fastq:
     filename = item.name
@@ -48,17 +48,11 @@ for item in item_to_remove:
                 discovered_fastqs.remove(thing)
 
 print(discovered_fastqs)
-            
-'''
-# removes objects from filelist until no more duplicates remain, will be removing the small files first
-place_to_delete = []
-print(item_to_remove)
-for i in range(0,len(item_to_remove)):
-    for j in range(0,len(discovered_fastqs)):
-        if item_to_remove[i] == discovered_fastqs[j]:
-            place_to_delete.append(j)
-print(place_to_delete)
-for place in place_to_delete:
-    del discovered_fastqs[place]
-print(str(discovered_fastqs))
-'''
+
+
+
+#figure out how to move stuff
+
+for item in discovered_fastqs:
+    shutil.move(item,new_dir)
+print("Everything Moved")

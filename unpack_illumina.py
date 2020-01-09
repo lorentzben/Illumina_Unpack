@@ -50,7 +50,8 @@ def create_index_of_fastq(project_name):
         filesize = item.stat().st_size
         discovered_fastqs.append(tuple([tuple([filename, filesize]), item]))
 
-    logging.info("Created table of filenames, filesizes and path location")
+    logger.info("Created table of filenames, filesizes and path location")
+    logger.debug(discovered_fastqs)
     return discovered_fastqs
 
 # checks to see if there are duplicate read names, returns [] if none
@@ -66,7 +67,7 @@ def discover_duplicates(list_of_fastqs):
             final_list.append(filename)
         else:
             duplicates.append(filename)
-
+    logger.debug(duplicates)
     return duplicates
 
 # removes duplicate reads names and favors larger filesize returns updated list
@@ -89,7 +90,7 @@ def unique_fastq_list(duplicates, discovered_fastqs):
             if thing[0][0] == item[0][0]:
                 if thing[0][1] < item[0][1]:
                     discovered_fastqs.remove(thing)
-
+    logger.debug(discovered_fastqs)
     return discovered_fastqs
 
 
