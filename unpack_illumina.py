@@ -102,20 +102,28 @@ def main(args):
     logging.critical(
         "Need to make dir and then copy the files located into the dir")
     set_up_logger(args.quiet)
-
-    index = create_index_of_fastq()
-    move_fastq_to_output_dir(index)
-    unzip_fastqgz()
-
+    list_of_fastqs = create_index_of_fastq(args.project_name)
+    list_of_duplicates = discover_duplicates(list_of_fastqs)
+    if list_of_duplicates == []:
+        print("do all this stuff")
+    else:
+        unique_fastq_files = unique_fastq_list(list_of_duplicates, list_of_fastqs)
+     '''    
+        Once all fastqs get moved, then if there are no duplicates
+        if args.unpack:
+            os.chdir()
+            subprocess("tar -xzf *.gz")
+    '''
 
 if __name__ == "__main__":
     # Build Argument Parser in order to facilitate ease of use for user
     parser = argparse.ArgumentParser(
-        description="Perform Automated Analysis and Formatting of Sequence Data")
-    parser.add_argument('-s', '--silent', action='store_true', default=False,
-                        help='does not create a human readable copy of the table only writes to file', dest='silent')
-    parser.add_argument('-f', '--no-file', action='store_true', default=False,
-                        help='does not create a computer readable file must use -r flag for human readability', dest='comp')
+        description="Un-Nests fastq data from illumina")
+    parser.add_argument('-n', action='store', required=True,
+                        help="name for analysis, will be filename for resultant directory", dest='job_name')
+
+    parser.add_argument('-u', action='store_true', default=False, help='Unpacks the tar archive, requires tar to be installed, suggested', dest='unpack'
+                        )
     parser.add_argument('-q', '--quiet', action='store_true', default=False,
                         help="Reduces the amount of text printed to terminal, check logfiles more often", dest='quiet')
     parser.add_argument('-v', '--version', action='version',
