@@ -109,7 +109,7 @@ def unzip_fastqgz():
 
 def main(args):
     p = Path.cwd()
-    new_dir = Path(p.parents[0]).joinpath(job_name)
+    new_dir = Path(p.parents[0]).joinpath(args.job_name)
     list_of_fastqs = create_index_of_fastq(args.job_name)
     logger.info("number of fastq.gz files found: %s" % len(list_of_fastqs))
     list_of_duplicates = discover_duplicates(list_of_fastqs)
