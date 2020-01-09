@@ -46,6 +46,7 @@ for i in range(0,len(item_to_remove)):
     for j in range(0,len(discovered_fastqs)):
         if item_to_remove[i] == discovered_fastqs[j]:
             place_to_delete.append(j)
+print(place_to_delete)
 for place in place_to_delete:
     del discovered_fastqs[place]
 print(str(discovered_fastqs))
