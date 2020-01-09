@@ -17,6 +17,7 @@ for item in list_of_fastq:
     filename = item.name
     filesize = item.stat().st_size
     discovered_fastqs.append(tuple([tuple([filename, filesize]), item]))
+print(str(discovered_fastqs))
 '''
 duplicates = []
 final_list = []
