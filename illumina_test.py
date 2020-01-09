@@ -6,7 +6,7 @@ import logging
 import argparse
 import shutil
 
-
+#first method
 p = Path.cwd()
 new_dir = Path(p.parents[0]).joinpath("test")
 Path.mkdir(new_dir)
@@ -18,7 +18,7 @@ for item in list_of_fastq:
     filesize = item.stat().st_size
     discovered_fastqs.append(tuple([tuple([filename, filesize]), item]))
 print(str(discovered_fastqs))
-
+#Second method
 duplicates = []
 final_list = []
 for item in discovered_fastqs:
@@ -30,6 +30,7 @@ for item in discovered_fastqs:
         duplicates.append(filename)
 print(duplicates)
 
+#third method
 item_to_remove = []
 # looks over items that were duplicated and finds the object associated with the filename and creates a list of objects
 for item in duplicates:
@@ -43,7 +44,6 @@ print(item_to_remove)
 while duplicates != []:
     #print(duplicates)
     for thing in item_to_remove:
-        discovered_fastqs.remove(thing)
         duplicates.remove(thing[0][0])
+        discovered_fastqs.remove(thing)
 print(str(discovered_fastqs))
-'''
