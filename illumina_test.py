@@ -18,7 +18,7 @@ for item in list_of_fastq:
     filesize = item.stat().st_size
     discovered_fastqs.append(tuple([tuple([filename, filesize]), item]))
 print(str(discovered_fastqs))
-'''
+
 duplicates = []
 final_list = []
 for item in discovered_fastqs:
@@ -28,7 +28,8 @@ for item in discovered_fastqs:
         final_list.append(filename)
     else:
         duplicates.append(filename)
-
+print(duplicates)
+'''
 item_to_remove = []
 # looks over items that were duplicated and finds the object associated with the filename and creates a list of objects
 for item in duplicates:
