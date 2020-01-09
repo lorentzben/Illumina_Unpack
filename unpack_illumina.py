@@ -101,7 +101,7 @@ def move_fastq_to_output_dir(discover_fastqs, new_dir):
     logger.info("all files moved")
 
 
-def unzip_fastqgz():
+def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
     subprocess.Popen("tar -xzf *gz")
     logger.info("All files unzipped")
@@ -123,7 +123,7 @@ def main(args):
         fastq_to_move = list_of_fastqs
     move_fastq_to_output_dir(fastq_to_move, new_dir)
     if args.unpack:
-        unzip_fastqgz()
+        unzip_fastqgz(new_dir)
     logger.info("You should be all set")
 
 
