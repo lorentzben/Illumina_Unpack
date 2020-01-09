@@ -11,7 +11,7 @@ import shutil
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
 # Logging handler which catches EVERYTHING
-file_logger = logging.FileHandler('fastq_for_me.log')
+file_logger = logging.FileHandler('unpack_illumina.log')
 file_logger.setLevel(logging.DEBUG)
 # Logging handler which logs less
 console_logger = logging.StreamHandler()
