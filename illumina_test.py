@@ -43,7 +43,7 @@ sorted(item_to_remove, key=lambda x: x[0][1])
 for item in item_to_remove:
     file_size = item[0][1]
     for thing in discovered_fastqs:
-        if thing[0][0] is item[0][0]:
+        if thing[0][0] == item[0][0]:
             if thing[0][1] < item[0][1]:
                 discovered_fastqs.remove(thing)
 
