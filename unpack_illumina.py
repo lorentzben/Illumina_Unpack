@@ -103,6 +103,7 @@ def move_fastq_to_output_dir(discover_fastqs, new_dir):
 
 def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
+    logging.info("Please wait while files are unzipped")
     os.system("gunzip *.gz")
     logger.info("All files unzipped")
 
