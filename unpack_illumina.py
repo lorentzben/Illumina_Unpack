@@ -97,7 +97,7 @@ def unique_fastq_list(duplicates, discovered_fastqs):
 def move_fastq_to_output_dir(discover_fastqs, new_dir):
     for item in discover_fastqs:
         shutil.move(str(item[1]), str(new_dir))
-        logger.debug("Moved %h" %item[0][0])
+        logger.debug("Moved %h" % str(item[0][0]))
     logger.info("all files moved")
 
 
