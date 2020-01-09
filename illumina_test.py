@@ -38,6 +38,7 @@ for item in duplicates:
 sorted(item_to_remove, key=lambda x: x[0][1])
 # removes objects from filelist until no more duplicates remain, will be removing the small files first
 while duplicates is not []:
+    print(duplicates)
     for thing in item_to_remove:
         discovered_fastqs.remove(thing)
         duplicates.remove(thing[0][0])
