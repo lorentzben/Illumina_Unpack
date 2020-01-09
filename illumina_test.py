@@ -22,7 +22,6 @@ print(str(discovered_fastqs))
 duplicates = []
 final_list = []
 for item in discovered_fastqs:
-
     filename = item[0][0]
     if filename not in final_list:
         final_list.append(filename)
@@ -40,6 +39,17 @@ for item in duplicates:
 # sorts list of objects based on filesize
 sorted(item_to_remove, key=lambda x: x[0][1])
 
+#next method
+for item in item_to_remove:
+    file_size = item[0][1]
+    for thing in discovered_fastqs:
+        if thing[0][0] is item[0][0]:
+            if thing[0][1] < item[0][1]:
+                discovered_fastqs.remove(thing)
+
+print(discovered_fastqs)
+            
+'''
 # removes objects from filelist until no more duplicates remain, will be removing the small files first
 place_to_delete = []
 print(item_to_remove)
@@ -51,3 +61,4 @@ print(place_to_delete)
 for place in place_to_delete:
     del discovered_fastqs[place]
 print(str(discovered_fastqs))
+'''
