@@ -8,7 +8,7 @@ import shutil
 
 
 p = Path.cwd()
-new_dir = Path(p.parents[0]).joinpath(project_name)
+new_dir = Path(p.parents[0]).joinpath("test")
 Path.mkdir(new_dir)
 discovered_fastqs = []
 list_of_fastq = list(p.glob('**/*.fastq.gz'))
