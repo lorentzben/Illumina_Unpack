@@ -42,6 +42,7 @@ sorted(item_to_remove, key=lambda x: x[0][1])
 
 # removes objects from filelist until no more duplicates remain, will be removing the small files first
 place_to_delete = []
+print(item_to_remove)
 for i in range(0,len(item_to_remove)):
     for j in range(0,len(discovered_fastqs)):
         if item_to_remove[i] == discovered_fastqs[j]:
