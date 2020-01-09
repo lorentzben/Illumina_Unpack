@@ -104,9 +104,9 @@ def unzip_fastqgz():
 def main(args):
     set_up_logger(args.quiet)
     list_of_fastqs = create_index_of_fastq(args.job_name)
-    log.info("number of fastq.gz files found: %s" %len(list_of_fastqs))
+    logger.info("number of fastq.gz files found: %s" %len(list_of_fastqs))
     list_of_duplicates = discover_duplicates(list_of_fastqs)
-    log.info("number of duplicate files found: %g" %len(list_of_duplicates))
+    logger.info("number of duplicate files found: %g" %len(list_of_duplicates))
     if list_of_duplicates == []:
         print("do all this stuff")
     else:
