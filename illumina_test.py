@@ -54,5 +54,5 @@ print(discovered_fastqs)
 #figure out how to move stuff
 
 for item in discovered_fastqs:
-    shutil.move(item,new_dir)
+    shutil.move(item[1],new_dir)
 print("Everything Moved")
