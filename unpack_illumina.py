@@ -45,7 +45,7 @@ def create_index_of_fastq(project_name):
     for item in list_of_fastq:
         filename = item.name
         filesize = item.stat().st_size
-        discovered_fastqs.append(tuple([tuple([filename, filesize]), item)])
+        discovered_fastqs.append(tuple([tuple([filename, filesize]), item]))
 
     logging.info("Created table of filenames, filesizes and path location")
     return discovered_fastqs
