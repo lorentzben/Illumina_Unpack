@@ -39,11 +39,11 @@ for item in duplicates:
             item_to_remove.append(source)
 # sorts list of objects based on filesize
 sorted(item_to_remove, key=lambda x: x[0][1])
-print(item_to_remove)
+
 # removes objects from filelist until no more duplicates remain, will be removing the small files first
-while duplicates != []:
-    #print(duplicates)
-    for thing in item_to_remove:
-        duplicates.pop()
-        discovered_fastqs.pop()
+
+for i in range(0,len(item_to_remove)):
+    for j in range(0,len(discovered_fastqs)):
+        if item_to_remove[i] == discovered_fastqs:
+            item_to_remove.del(i)
 print(str(discovered_fastqs))
