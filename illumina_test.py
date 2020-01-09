@@ -44,6 +44,8 @@ print(item_to_remove)
 while duplicates != []:
     #print(duplicates)
     for thing in item_to_remove:
+        print(thing[0][0])
+        print(duplicates)
         duplicates.remove(thing[0][0])
         discovered_fastqs.remove(thing)
 print(str(discovered_fastqs))
