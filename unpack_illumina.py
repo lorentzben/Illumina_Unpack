@@ -94,32 +94,41 @@ def unique_fastq_list(duplicates, discovered_fastqs):
     return discovered_fastqs
 
 
-def move_fastq_to_output_dir(index):
-    print("moved")
+def move_fastq_to_output_dir(discover_fastqs, new_dir):
+    for item in discovered_fastqs:
+        shutil.move(str(item[1]), str(new_dir))
+        logger.debug("Moved %h" % item[0][0])
+    logger.info("all files moved")
 
 
 def unzip_fastqgz():
-    print("unzipped")
+    os.chdir(new_dir)
+    subprocess.Popen("tar -xzf *gz")
+    logger.info("All files unzipped")
 
 
 def main(args):
-    set_up_logger(args.quiet)
+    p = Path.cwd()
+    new_dir = Path(p.parents[0]).joinpath(job_name)
     list_of_fastqs = create_index_of_fastq(args.job_name)
-    logger.info("number of fastq.gz files found: %s" %len(list_of_fastqs))
+    logger.info("number of fastq.gz files found: %s" % len(list_of_fastqs))
     list_of_duplicates = discover_duplicates(list_of_fastqs)
-    logger.info("number of duplicate files found: %g" %len(list_of_duplicates))
-    if list_of_duplicates == []:
-        print("do all this stuff")
+    logger.info("number of duplicate files found: %g" %
+                len(list_of_duplicates))
+    if list_of_duplicates != []:
+        unique_fastq_files = unique_fastq_list(
+            list_of_duplicates, list_of_fastqs)
+        fastq_to_move = unique_fastq_files
     else:
-        unique_fastq_files = unique_fastq_list(list_of_duplicates, list_of_fastqs)
-'''    
-Once all fastqs get moved, then if there are no duplicates
-if args.unpack:
-    os.chdir()
-    subprocess("tar -xzf *.gz")
-'''
+        fastq_to_move = list_of_fastqs
+    move_fastq_to_output_dir(fastq_to_move, new_dir)
+    if args.unpack:
+        unzip_fastqgz()
+    logger.info("You should be all set")
+
 
 if __name__ == "__main__":
+    # TODO choose extention or have it default to fastq.gz
     # Build Argument Parser in order to facilitate ease of use for user
     parser = argparse.ArgumentParser(
         description="Un-Nests fastq data from illumina")
