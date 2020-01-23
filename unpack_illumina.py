@@ -132,7 +132,8 @@ def main(args):
     else:
         fastq_to_move = list_of_fastqs
     move_fastq_to_output_dir(fastq_to_move, new_dir)
-    rename_fastqs(new_dir,fastq_to_move)
+    print(fastq_to_move)
+    #rename_fastqs(new_dir,fastq_to_move)
     if args.unpack:
         unzip_fastqgz(new_dir)
     logger.info("You should be all set")
