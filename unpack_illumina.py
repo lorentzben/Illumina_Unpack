@@ -106,7 +106,7 @@ def rename_fastqs(current_dir,fastqs_to_rename):
     subst = ''
     
     for item in fastqs_to_rename:
-        old_name = item
+        old_name = str(item[0][0])
         new_name = re.sub(regex, subst, old_name, 0)
         os.rename(current_dir+old_name, current_dir+new_name)
 
@@ -132,8 +132,7 @@ def main(args):
     else:
         fastq_to_move = list_of_fastqs
     move_fastq_to_output_dir(fastq_to_move, new_dir)
-    print(fastq_to_move)
-    #rename_fastqs(new_dir,fastq_to_move)
+    rename_fastqs(new_dir,fastq_to_move)
     if args.unpack:
         unzip_fastqgz(new_dir)
     logger.info("You should be all set")
