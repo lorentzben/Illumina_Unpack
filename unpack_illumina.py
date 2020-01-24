@@ -113,11 +113,12 @@ def rename_fastqs(current_dir,fastqs_to_rename):
         #this is gonna be written out to file
         new_names_for_design.append(new_name_no_ext)
         os.rename(current_dir.joinpath(Path(old_name)), current_dir.joinpath(Path(new_name)))
-    
+    '''
     with open("design_INTERMEDIATE.txt",'w') as temp_design:
         wr = csv.writer(temp_design, quoting=csv.QUOTE_ALL)
         wr.writerow(new_names_for_design)
     logger.info("There is a temp design file that needs catagories added in this dir") 
+    '''
 
 def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
@@ -125,6 +126,17 @@ def unzip_fastqgz(new_dir):
     os.system("gunzip *.gz")
     logger.info("All files unzipped")
 
+def make_int_design():
+    os.system("mothur '#make.file(inputdir=., type=fastq, prefix=temp_name)'")
+    with open('temp_name.file','r') as temp_reader:
+        all_lines = temp_reader.readlines()
+    design_names = []
+    for line in all_lines:
+        design_names.append(line.split('\t')[0])
+    with open('design_TEMP.txt', 'w') as writer:
+        wr = csv.writer(writer, quoting=csv.QUOTE_ALL)
+        wr.writerow(design_names + '\n')
+    logger.info("There is a temp design file that needs catagories added in this dir")
 
 def main(args):
     p = Path.cwd()
@@ -144,6 +156,7 @@ def main(args):
     rename_fastqs(new_dir,fastq_to_move)
     if args.unpack:
         unzip_fastqgz(new_dir)
+    make_int_design()
     logger.info("You should be all set")
 
 
