@@ -117,7 +117,7 @@ def rename_fastqs(current_dir,fastqs_to_rename):
     with open("design_INTERMEDIATE.txt",'w') as temp_design:
         wr = csv.writer(temp_design, quoting=csv.QUOTE_ALL)
         wr.writerow(new_names_for_design)
-    logger.INFO("There is a temp design file that needs catagories added in this dir") 
+    logger.info("There is a temp design file that needs catagories added in this dir") 
 
 def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
