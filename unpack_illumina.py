@@ -7,7 +7,7 @@ import logging
 import argparse
 import shutil
 import re
-
+import csv
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -104,11 +104,19 @@ def move_fastq_to_output_dir(discover_fastqs, new_dir):
 def rename_fastqs(current_dir,fastqs_to_rename):
     regex = r"-*_*"
     subst = ''
-    
+    new_names_for_design = []
     for item in fastqs_to_rename:
         old_name = str(item[0][0])
         new_name = re.sub(regex, subst, old_name, 0)
+        #pulls off the .fastq 
+        new_name_no_ext = new_name[:-6]
+        #this is gonna be written out to file
+        new_names_for_design.append(new_name_no_ext)
         os.rename(current_dir.joinpath(Path(old_name)), current_dir.joinpath(Path(new_name)))
+    with open("design_INTERMEDIATE.txt",'w') as temp_design:
+        wr = csv.writer(temp_design, quoting=csv.QUOTE_ALL)
+        wr.writerow(temp_design)
+    logger.INFO("There is a temp design file that needs catagories added in this dir")
 
 def unzip_fastqgz(new_dir):
     os.chdir(new_dir)
