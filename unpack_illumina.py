@@ -109,7 +109,7 @@ def rename_fastqs(current_dir,fastqs_to_rename):
         old_name = str(item[0][0])
         new_name = re.sub(regex, subst, old_name, 0)
         #pulls off the .fastq 
-        new_name_no_ext = new_name[:-6]
+        new_name_no_ext = new_name[:-9]
         #this is gonna be written out to file
         new_names_for_design.append(new_name_no_ext)
         os.rename(current_dir.joinpath(Path(old_name)), current_dir.joinpath(Path(new_name)))
