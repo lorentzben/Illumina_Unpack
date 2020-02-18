@@ -102,7 +102,7 @@ def move_fastq_to_output_dir(discover_fastqs, new_dir):
     logger.info("all files moved")
 
 def rename_fastqs(current_dir,fastqs_to_rename):
-    regex = r"-*"
+    regex = r"-"
     subst = ''
 
     for item in fastqs_to_rename:
